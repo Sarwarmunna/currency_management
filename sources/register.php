@@ -10,6 +10,7 @@
 						if(isset($_POST['bit_login'])) {
 							$username = protect($_POST['username']);
 							$email = protect($_POST['email']);
+							$mobile_number = protect($_POST['mobile']);
 							$password = protect($_POST['password']);
 							$repassword = protect($_POST['repassword']);
 							$time = time();
@@ -33,9 +34,10 @@
 							} else {
 								$data['status'] = 'success';
 								$pass = md5($password);
-								$insert = $db->query("INSERT bit_users (username,email,password,status,ip,signup_time,email_verified,document_verified,mobile_verified) VALUES ('$username','$email','$pass','1','$ip','$time','0','0','0')");
-								$query = $db->query("SELECT * FROM bit_users WHERE username='$username' and email='$email' and password='$pass'");
+							   $insert = $db->query("INSERT bit_users (username,email,mobile_number,password,status,ip,signup_time,email_verified,document_verified,mobile_verified) VALUES ('$username','$email','$mobile_number',$pass','1','$ip','$time','0','0','0')");
+								$query = $db->query("SELECT * FROM bit_users WHERE username='$username' and email='$email' and mobile_number='$mobile_number'  and password='$pass'");
 								$row = $query->fetch_assoc();
+								
 								$_SESSION['bit_uid'] = $row['id'];
 								$verify_type = get_verify_type();
 								if($verify_type == "9") {
@@ -52,10 +54,13 @@
 						<!-- form -->
 						<form action="" method="POST">
 							<div class="form-group">
-								<input type="text" class="form-control" name="username" placeholder="<?php echo $lang['username']; ?>" >
+								<input type="text" class="form-control" name="username" placeholder="Name" >
 							</div>
 							<div class="form-group">
 								<input type="text" class="form-control" name="email" placeholder="<?php echo $lang['email_address']; ?>" >
+							</div>
+							<div class="form-group">
+								<input type="text" class="form-control" name="mobile" placeholder="Phone" >
 							</div>
 							<div class="form-group">
 								<input type="password" class="form-control" name="password" placeholder="<?php echo $lang['password']; ?>" >
