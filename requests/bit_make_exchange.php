@@ -504,7 +504,7 @@ if($query->num_rows>0) {
                                 </div>
 						<div class="form-group">
 							<label><?php echo $lang['enter_transaction_number']; ?></label>
-							<input type="file" class="form-control" name="transaction_id">
+							<input type="text" class="form-control" name="transaction_id">
 						</div>
 						<button type="button" onclick="bit_confirm_transaction('<?php echo $row['id']; ?>');" class="btn btn-primary btn-block" name="add_image"><?php echo $lang['btn_confirm_transaction']; ?></button>
 					</form>
